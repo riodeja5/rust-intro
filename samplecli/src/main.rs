@@ -85,23 +85,16 @@ fn main() {
     if let Some(path) = opts.formula_file {
         let f = File::open(path).unwrap();
         let reader = BufReader::new(f);
-
-        for line in reader.lines() {
-            let line = line.unwrap();
-            println!("{}", line);
-        }
+        run(reader, opts.verbose)
     } else {
         // ファイルを指定しなかった場合
         println!("No file is specified");
     }
 }
 
-// fn run<R: BufRead>(reader: R, verbose: bool) {
-//     let calc = RpnCalculator::new(verbose);
-
-//     for line in reader.lines() {
-//         let line = line.unwrap();
-//         let answer = calc.eval(&line);
-//         println!("{}", answer);
-//     }
-// }
+fn run(reader: BufReader<File>, verbose: bool) {
+    for line in reader.lines() {
+        let line = line.unwrap();
+        println!("{}", line);
+    }
+}
