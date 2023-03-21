@@ -2,17 +2,18 @@ use clap::Parser;
 use std::fs::File;
 use std::io::{stdin, BufRead, BufReader};
 
-// struct RpnCalculator(bool);
+struct RpnCalculator(bool);
 
-// impl RpnCalculator {
-//     pub fn new(verbose: bool) -> Self {
-//         Self(verbose)
-//     }
+impl RpnCalculator {
+    pub fn new(verbose: bool) -> Self {
+        Self(verbose)
+    }
 
-//     pub fn eval(&self, formula: &str) -> i32 {
-//         let mut tokens = formula.split_whitespace().rev().collect::<Vec<_>>();
-//         self.eval_inner(&mut tokens)
-//     }
+    pub fn eval(&self, formula: &str) -> i32 {
+        // let mut tokens = formula.split_whitespace().rev().collect::<Vec<_>>();
+        // self.eval_inner(&mut tokens)
+        0
+    }
 
 //     fn eval_inner(&self, tokens: &mut Vec<&str>) -> i32 {
 //         let mut stack = Vec::new();
@@ -47,7 +48,7 @@ use std::io::{stdin, BufRead, BufReader};
 //             panic!("invalid syntax")
 //         }
 //     }
-// }
+}
 
 #[derive(Parser, Debug)]
 #[clap(
@@ -66,26 +67,13 @@ struct Opts {
     formula_file: Option<String>,
 }
 
-// fn main() {
-//     let opts = Opts::parse();
-
-//     if let Some(path) = opts.formula_file {
-//         let f = File::open(path).unwrap();
-//         let reader = BufReader::new(f);
-//         run(reader, opts.verbose);
-//     } else {
-//         let stdin = stdin();
-//         let reader = stdin.lock();
-//         run(reader, opts.verbose);
-//     }
-// }
 fn main() {
     let opts = Opts::parse();
 
     if let Some(path) = opts.formula_file {
         let f = File::open(path).unwrap();
         let reader = BufReader::new(f);
-        run(reader, opts.verbose)
+        run(reader, opts.verbose);
     } else {
         let stdin = stdin();
         let reader = stdin.lock();
@@ -94,8 +82,11 @@ fn main() {
 }
 
 fn run<R: BufRead>(reader: R, verbose: bool) {
+    let calc = RpnCalculator::new(verbose);
+
     for line in reader.lines() {
         let line = line.unwrap();
-        println!("{}", line);
+        let answer = calc.eval(&line);
+        println!("{}", answer);
     }
 }
