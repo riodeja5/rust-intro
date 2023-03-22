@@ -34,17 +34,17 @@ impl RpnCalculator {
                 stack.push(res);
             }
 
-        // `-v`オプションが指定されている場合は、この時点でのトークンとスタックの状態を出力
-        if self.0 {
-            println!("{:?} {:?}", tokens, stack);
+            // `-v`オプションが指定されている場合は、この時点でのトークンとスタックの状態を出力
+            if self.0 {
+                println!("{:?} {:?}", tokens, stack);
+            }
         }
-    }
 
-    if stack.len() == 1 {
-        stack[0]
-    } else {
-        panic!("invalid syntax")
-    }
+        if stack.len() == 1 {
+            stack[0]
+        } else {
+            panic!("invalid syntax")
+        }
     }
 }
 
