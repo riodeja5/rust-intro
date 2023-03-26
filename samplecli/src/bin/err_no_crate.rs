@@ -34,6 +34,6 @@ fn get_int_from_file() -> Result<i32, MyError> {
 fn main() {
     match get_int_from_file() {
         Ok(x) => print!("{}", x),
-        Err(e) => println!("I/O Error: {}", e),
+        Err(e) => println!("Error: {}", e),
     }
 }
