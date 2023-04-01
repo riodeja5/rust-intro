@@ -1,4 +1,4 @@
-use anyhow::{bail, ensure, Context, Result};
+use anyhow::{ensure, Context, Result};
 
 use clap::Parser;
 use std::fs::File;
